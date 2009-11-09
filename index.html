@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+   
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>index</title>
+	<link rel="stylesheet" href="stylesheets/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<script src="javascripts/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javascripts/lib/resources.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javascripts/lib/timer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javascripts/lib/sprite_sheet.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javascripts/lib/animation.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javascripts/lib/player.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="javascripts/engine.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function () {
+			new Resources({ 'background':'images/tlo.jpg', 'player1':'images/battlers/bitch.png' });
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<canvas id="canvas" width="800" height="600"></canvas>
+	</div>
+</body>
+</html>
