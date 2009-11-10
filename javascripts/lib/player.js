@@ -13,8 +13,8 @@ Player.prototype = {
 	vel_x: 0,
 	vel_y: 150,
 	
-	width: 97,
-	height: 97,
+	width: 75,
+	height: 75,
 	
 	top: function() { return Math.round(this.y); },
 	left: function() { return Math.round(this.x); },
@@ -70,23 +70,22 @@ Player.prototype = {
 				{ name: 'run1', x: 0, y: 4 },
 				{ name: 'run2', x: 1, y: 4 },
 				{ name: 'run3', x: 2, y: 4 },
+				{ name: 'run4', x: 3, y: 4 },
 	    ]
 		});
 
 		this.animations['idle'] = new Animation([
-		   { sprite: 'idle1', time: 0.1 },
-		   { sprite: 'idle2', time: 0.1},
-		   { sprite: 'idle3', time: 0.1 },
+		   { sprite: 'idle1', time: 0.2 },
+		   { sprite: 'idle2', time: 0.2 },
+		   { sprite: 'idle3', time: 0.2 },
 			 { sprite: 'idle4', time: 0.2 },
-			 { sprite: 'idle3', time: 0.1 },
-			 { sprite: 'idle2', time: 0.1 },
 	  ], this.sprites);
 	
 		this.animations['run'] = new Animation([
-		   { sprite: 'run1', time: 0.2 },
-		   { sprite: 'run2', time: 0.2 },
-		   { sprite: 'run3', time: 0.2 },
-			 { sprite: 'run2', time: 0.2 },
+		   { sprite: 'run1', time: 0.1 },
+		   { sprite: 'run2', time: 0.1 },
+		   { sprite: 'run3', time: 0.1 },
+			 { sprite: 'run4', time: 0.1 },
 	  ], this.sprites);
 	}
 }

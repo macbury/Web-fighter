@@ -39,18 +39,18 @@ var engine = {
 			
 			if (event.keyCode == 65) {
 				// A
-				self.player1.vel_x = -100;
+				self.player1.vel_x = -200;
 			} else if (event.keyCode == 68) {
 				// D
-				self.player1.vel_x = 100;
+				self.player1.vel_x = 200;
 			}else{
 				self.player1.vel_x = 0;
 			};
 			
 			if (event.keyCode == 35) {
-				self.player1.vel_y = 100;
+				self.player1.vel_y = 200;
 			} else {
-				self.player1.vel_y = -100;
+				self.player1.vel_y = -200;
 			}
 			
 		}).keyup(function () {
