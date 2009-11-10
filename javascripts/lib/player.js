@@ -8,10 +8,10 @@ Player.prototype = {
 	state: 'idle',
 	
 	x: 400,
-	y: 300,
+	y: 0,
 	
 	vel_x: 0,
-	vel_y: 50,
+	vel_y: 150,
 	
 	width: 97,
 	height: 97,
@@ -26,6 +26,8 @@ Player.prototype = {
 		
 		if (engine.mainCollider > this.bottom()) {
 			this.y = this.y + this.vel_y * seconds;
+		} else {
+			this.y = engine.mainCollider - this.width;
 		}
 		
 		this.currentAnimation().animate(seconds);

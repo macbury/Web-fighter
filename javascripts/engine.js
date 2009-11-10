@@ -72,7 +72,17 @@ var engine = {
 		var c = self.canvas;
 		c.clearRect(0,0,self.width,self.height);
 		c.drawImage(self.resources.getById('background'), 0, 0);
-
+		
+		if (debug) { 
+			c.strokeStyle = "rgb(0,0,200)";
+			
+			c.beginPath();
+			c.moveTo(0,self.mainCollider);
+			c.lineTo(self.width,self.mainCollider);
+			c.stroke();
+		
+		}
+		
 		self.player1.draw(c);
 	}
 }
