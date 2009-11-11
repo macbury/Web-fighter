@@ -3,11 +3,16 @@ var curY = 0;
 
 var debug = true;
 
+function log (msg) {
+	if (debug) { console.log(msg) };
+}
+
 var engine = {
 	width: 800,
 	height: 600,
 	
-	mainCollider: 450,
+	floorY: 350,
+	gravity: 300,
 	
 	mainTimer: null,
 	frameTimer: null,
@@ -36,25 +41,22 @@ var engine = {
 		});
 		
 		$(window).keydown(function(event){
+			log('Key: '+event.keyCode);
 			
 			if (event.keyCode == 65) {
 				// A
-				self.player1.vel_x = -200;
+				self.player1.run(LEFT);
 			} else if (event.keyCode == 68) {
 				// D
-				self.player1.vel_x = 200;
+				self.player1.run(RIGHT);
+			}else if(event.keyCode == 87){
+				self.player1.jump();
 			}else{
-				self.player1.vel_x = 0;
-			};
-			
-			if (event.keyCode == 35) {
-				self.player1.vel_y = 200;
-			} else {
-				self.player1.vel_y = -200;
+				self.player1.stop();
 			}
 			
-		}).keyup(function () {
-			$(this).keydown();
+		}).keyup(function (event) {
+			$(window).keydown();
 		});
 	},
 	
@@ -77,8 +79,8 @@ var engine = {
 			c.strokeStyle = "rgb(0,0,200)";
 			
 			c.beginPath();
-			c.moveTo(0,self.mainCollider);
-			c.lineTo(self.width,self.mainCollider);
+			c.moveTo(0,self.floorY);
+			c.lineTo(self.width,self.floorY);
 			c.stroke();
 		
 		}

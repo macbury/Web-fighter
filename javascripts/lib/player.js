@@ -1,3 +1,10 @@
+var STATE_JUMP = 'jump';
+var STATE_RUN = 'run';
+var STATE_IDLE = 'idle';
+
+var LEFT = -200;
+var RIGHT = 200;
+
 function Player(resource) {
 	this.resource = resource;
 	this.buildSprite();
@@ -5,13 +12,14 @@ function Player(resource) {
 
 Player.prototype = {
 	animations: {},
-	state: 'idle',
+	state: STATE_JUMP,
+	isJumping: true,
 	
 	x: 400,
 	y: 0,
 	
 	vel_x: 0,
-	vel_y: 150,
+	vel_y: 0,
 	
 	width: 75,
 	height: 75,
@@ -21,16 +29,46 @@ Player.prototype = {
 	right: function() { return Math.round(this.x + this.width); },
 	bottom: function() { return Math.round(this.y + this.height); },
 	
-	process: function(seconds){
-		this.x += this.vel_x * seconds;
+	run: function(vel){
+		this.vel_x = vel;
+		this.state = STATE_RUN;
+	},
+	
+	stop: function(){
+		if (this.state == STATE_RUN) {
+			this.state = STATE_IDLE;
+		};
 		
-		if (engine.mainCollider > this.bottom()) {
-			this.y = this.y + this.vel_y * seconds;
-		} else {
-			this.y = engine.mainCollider - this.width;
+		this.vel_x = 0;
+	},
+	
+	jump: function(){
+		if (this.isJumping) {
+			this.vel_y = -200;
+			this.isJumping = true;
+			this.state = STATE_JUMP;
+			log('Player is jumping!');
+		}
+	},
+	
+	process: function(seconds){
+		if (this.isJumping) {
+			this.vel_y = this.vel_y + engine.gravity * seconds 
 		}
 		
+		this.x += this.vel_x * seconds;
+		this.y += this.vel_y * seconds;
+		
 		this.currentAnimation().animate(seconds);
+		
+		if (this.isJumping && this.bottom() > engine.floorY) {
+			this.vel_y = 0;
+			this.y = engine.floorY - this.height;
+			this.state = STATE_IDLE;
+			this.isJumping = false;
+		}else{
+			this.isJumping = true;
+		}
 	},
 	
 	currentAnimation: function(){
@@ -80,7 +118,11 @@ Player.prototype = {
 		   { sprite: 'idle3', time: 0.2 },
 			 { sprite: 'idle4', time: 0.2 },
 	  ], this.sprites);
-	
+		
+		this.animations['jump'] = new Animation([
+		   { sprite: 'idle1', time: 0.5 }
+	  ], this.sprites);
+		
 		this.animations['run'] = new Animation([
 		   { sprite: 'run1', time: 0.1 },
 		   { sprite: 'run2', time: 0.1 },
